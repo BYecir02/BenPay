@@ -9,7 +9,7 @@ export default function HomeTab() {
   const todaySales = 14;
   const todayRevenue = 125000; // FCFA
   const lowStock = 2;
-  const userName = "Jean Dupont";
+  const userName = "Badirou Mohamed Yecir";
 
   // Animations
   const fadeAnim = useRef(new Animated.Value(0)).current;
@@ -35,6 +35,7 @@ export default function HomeTab() {
     <Animated.ScrollView 
       style={[styles.container, { opacity: fadeAnim }]}
       contentContainerStyle={{ paddingBottom: 32 }}
+          showsVerticalScrollIndicator={false} 
     >
       {/* Message de bienvenue */}
       <View style={styles.header}>
@@ -42,8 +43,8 @@ export default function HomeTab() {
         <ThemedText type="subtitle" style={styles.subtitle}>Tableau de bord BenPay</ThemedText>
       </View>
 
-      {/* Statistiques clés */}
-      <Animated.View style={[styles.statsRow, { transform: [{ scale: scaleValue }] }]}>
+      {/* Statistiques clés - Version verticale plus large */}
+      <Animated.View style={[styles.statsContainer, { transform: [{ scale: scaleValue }] }]}>
         <StatCard 
           icon="shopping-cart" 
           value={todaySales} 
@@ -114,14 +115,18 @@ export default function HomeTab() {
   );
 }
 
-// Composant StatCard réutilisable
+// Composant StatCard réutilisable - Version plus large
 const StatCard = ({ icon, value, label, color, iconBg }) => (
   <View style={[styles.statCard, { borderLeftColor: color }]}>
-    <View style={[styles.statIconContainer, { backgroundColor: iconBg }]}>
-      <MaterialIcons name={icon} size={20} color={color} />
+    <View style={styles.statContent}>
+      <View style={[styles.statIconContainer, { backgroundColor: iconBg }]}>
+        <MaterialIcons name={icon} size={24} color={color} />
+      </View>
+      <View style={styles.statTextContainer}>
+        <ThemedText type="statValue" style={{ color }}>{value}</ThemedText>
+        <ThemedText type="statLabel">{label}</ThemedText>
+      </View>
     </View>
-    <ThemedText type="statValue" style={{ color }}>{value}</ThemedText>
-    <ThemedText type="statLabel">{label}</ThemedText>
   </View>
 );
 
@@ -155,31 +160,37 @@ const styles = StyleSheet.create({
     fontSize: 16,
     color: '#666',
   },
-  statsRow: {
-    flexDirection: 'row',
-    justifyContent: 'space-between',
+  // Nouveau style pour les stats en vertical
+  statsContainer: {
     marginBottom: 28,
-    gap: 12,
+    gap: 16,
   },
   statCard: {
-    flex: 1,
     backgroundColor: '#fff',
     borderRadius: 12,
-    padding: 16,
+    padding: 20, // Plus de padding
     borderLeftWidth: 4,
-    elevation: 1,
+    elevation: 2,
     shadowColor: '#000',
-    shadowOpacity: 0.03,
-    shadowRadius: 8,
+    shadowOpacity: 0.05,
+    shadowRadius: 10,
     shadowOffset: { width: 0, height: 2 },
   },
+  // Nouveau layout horizontal pour le contenu
+  statContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
   statIconContainer: {
-    width: 36,
-    height: 36,
-    borderRadius: 18,
+    width: 48, // Plus grand
+    height: 48, // Plus grand
+    borderRadius: 24,
     justifyContent: 'center',
     alignItems: 'center',
-    marginBottom: 8,
+  },
+  statTextContainer: {
+    flex: 1,
+    marginLeft: 16,
   },
   sectionTitle: {
     marginBottom: 16,
