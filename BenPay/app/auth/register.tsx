@@ -1,17 +1,17 @@
 import { useState } from 'react';
-import { StyleSheet, TextInput, Button, Alert } from 'react-native';
+import { StyleSheet, TextInput, Button, Alert, TouchableOpacity } from 'react-native';
 import { ThemedView } from '@/components/ThemedView';
 import { ThemedText } from '@/components/ThemedText';
 import { useRouter } from 'expo-router';
 
 export default function RegisterScreen() {
-  const [email, setEmail] = useState('');
+  const [phone, setPhone] = useState('');
   const [password, setPassword] = useState('');
   const router = useRouter();
 
   const handleRegister = () => {
     // Logique d'inscription à compléter (API, validation, etc.)
-    Alert.alert('Inscription', `Email: ${email}\nMot de passe: ${password}`);
+    Alert.alert('Inscription', `Téléphone: ${phone}\nMot de passe: ${password}`);
     router.replace('/(tabs)');
   };
 
@@ -20,11 +20,11 @@ export default function RegisterScreen() {
       <ThemedText type="title">Inscription</ThemedText>
       <TextInput
         style={styles.input}
-        placeholder="Email"
-        autoCapitalize="none"
-        keyboardType="email-address"
-        value={email}
-        onChangeText={setEmail}
+        placeholder="Numéro de téléphone"
+        keyboardType="phone-pad"
+        value={phone}
+        onChangeText={setPhone}
+        maxLength={15}
       />
       <TextInput
         style={styles.input}
@@ -34,6 +34,13 @@ export default function RegisterScreen() {
         onChangeText={setPassword}
       />
       <Button title="S'inscrire" onPress={handleRegister} />
+
+      {/* Lien vers la connexion */}
+      <TouchableOpacity onPress={() => router.replace('/auth/login')}>
+        <ThemedText type="link" style={{ marginTop: 16, textAlign: 'center' }}>
+          Déjà un compte ? Se connecter
+        </ThemedText>
+      </TouchableOpacity>
     </ThemedView>
   );
 }
