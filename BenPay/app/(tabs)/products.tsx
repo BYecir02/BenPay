@@ -91,6 +91,7 @@ export default function ProductsScreen() {
         ListEmptyComponent={
           <ThemedText>Aucun produit pour le moment.</ThemedText>
         }
+        showsVerticalScrollIndicator={false}
       />
     </View>
   );

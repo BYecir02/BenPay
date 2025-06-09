@@ -2,6 +2,7 @@ import { View, StyleSheet, ScrollView, TouchableOpacity, Animated } from 'react-
 import { ThemedText } from '@/components/ThemedText';
 import { MaterialIcons } from '@expo/vector-icons';
 import { useEffect, useRef } from 'react';
+import { useRouter } from 'expo-router';
 
 export default function HomeTab() {
   // Simulations de données
@@ -13,6 +14,7 @@ export default function HomeTab() {
   // Animations
   const fadeAnim = useRef(new Animated.Value(0)).current;
   const scaleValue = useRef(new Animated.Value(0.9)).current;
+  const router = useRouter();
 
   useEffect(() => {
     Animated.parallel([
@@ -74,22 +76,25 @@ export default function HomeTab() {
           icon="point-of-sale" 
           label="Nouvelle vente" 
           color="#007AFF"
-          onPress={() => console.log("Nouvelle vente")}
+          onPress={() => router.push('/(tabs)/new-sale')}
         />
         <ActionCard 
           icon="inventory" 
           label="Gérer les produits" 
           color="#27AE60"
+          onPress={() => router.push('/(tabs)/products')}
         />
         <ActionCard 
           icon="history" 
           label="Historique" 
           color="#F39C12"
+          onPress={() => router.push('/(tabs)/transactions')}
         />
         <ActionCard 
           icon="file-download" 
           label="Exporter (CSV)" 
           color="#9B51E0"
+          onPress={() => {/* Ajoute ici l'action d'export */}}
         />
       </View>
 

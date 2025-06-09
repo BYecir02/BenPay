@@ -6,8 +6,8 @@ export default function TabLayout() {
     <Tabs
       screenOptions={{
         headerShown: false,
-        tabBarActiveTintColor: '#007AFF', // Couleur de l’onglet actif
-        tabBarInactiveTintColor: '#888',  // Couleur des onglets inactifs
+        tabBarActiveTintColor: '#007AFF',
+        tabBarInactiveTintColor: '#888',
         tabBarStyle: {
           backgroundColor: '#fff',
           borderTopWidth: 1,
@@ -84,6 +84,13 @@ export default function TabLayout() {
               size={focused ? 32 : 26}
             />
           ),
+        }}
+      />
+      {/* Ajoute new-sale mais CACHE-LE de la navbar */}
+      <Tabs.Screen
+        name="new-sale"
+        options={{
+          href: null, // Cette ligne CACHE l'onglet de la navbar
         }}
       />
     </Tabs>
